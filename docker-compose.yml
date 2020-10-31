@@ -9,16 +9,16 @@ services:
     volumes:
       - ./dataAPI:/dataAPI
     restart: always
-  client:
-    build: client
-    container_name: "taway-client"
+  web:
+    build: webApp
+    container_name: "taway-web-app"
     ports:
       - "3001:3001"
       - "4200:4200"
       - "8080:8080"
     volumes:
-      - ./client:/client
-    working_dir: /client
+      - ./webApp:/webApp
+    working_dir: /webApp
     command: "npm start"
   wss:
     build: wss
