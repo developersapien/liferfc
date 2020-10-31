@@ -16,13 +16,10 @@ class APIService {
           name,
           room,
         });
-        console.log("User Create response", userCreateResponse);
         return userCreateResponse;
       } else {
       }
-    } catch (error) {
-      console.log("Server Error", error);
-    }
+    } catch (error) {}
   }
 
   async clearUser(id: string) {
