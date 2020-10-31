@@ -1,28 +1,15 @@
 {
   "rooms": [
     {
-      "id": 1,
-      "name": "istanbul",
-      "players": [1],
-      "type": "cpu"
-    },
-    {
-      "id": 2,
-      "name": "berlin",
-      "owner": 2,
-      "players": [2],
-      "type": "cpu"
-    },
-    {
       "id": "d2726a4a",
-      "name": "Sprudel",
+      "name": "Room Berlin",
       "owner": "I0yZ-jSTAGV8xTNkAAAD",
       "type": "human",
       "players": []
     },
     {
       "id": "aa0c86fa",
-      "name": "Cola",
+      "name": "Room Izmir",
       "owner": "lqcflVIEANZWYkmAAAAC",
       "type": "human",
       "players": []
