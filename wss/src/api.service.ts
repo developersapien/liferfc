@@ -1,83 +1,87 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:3000";
+class APIService {
+  isUserExist: boolean = false;
 
-const activeUsers = [];
-
-const getUserRoom = async (id) => {
-  try {
-    const response = await axios.get(`/users/${id}`);
-    return response.data.room;
-  } catch (error) {}
-};
-
-const getUserDetail = async () => {
-  try {
-    const userDetail = await axios.get(`/users`);
-    return userDetail;
-  } catch (error) {}
-};
-
-const addPlayerToRoom = async (id, username, room) => {
-  try {
-    const getActivePlayers = await axios.get(`/rooms/${id}`);
-    const activePlayer = getActivePlayers?.data?.players;
-
-    const response = await axios.patch(`/rooms/${id}`, {
-      players: [...activePlayer, id],
-    });
-    return response;
-  } catch (error) {
-    //console.log("Errorsasasasas", error);
+  constructor() {
+    axios.defaults.baseURL = "http://json-server:3000";
   }
-};
 
-const assingRoomToPlayer = async (id, roomName) => {
-  try {
-    const response = await axios.patch(`/users/${id}`, {
-      room: roomName,
-    });
-    return response;
-  } catch (error) {}
-};
-
-/* Check if user Exists */
-const isUserExist = (name: string): boolean => {
-  let isExist;
-  getUserDetail().then((result) => {
-    if (result?.data.find((user) => user.name === name)) {
-      isExist = true;
-    } else {
-      isExist = false;
+  async createUser(id: string, name: string, room: string = "") {
+    try {
+      const userExist = await this._isUserExist(name);
+      if (!userExist) {
+        const userCreateResponse = await axios.post("/users", {
+          id,
+          name,
+          room,
+        });
+        console.log("User Create response", userCreateResponse);
+        return userCreateResponse;
+      } else {
+      }
+    } catch (error) {
+      console.log("Server Error", error);
     }
-  });
-  console.log("isExost", isExist);
-  return isExist;
-};
+  }
 
-const createUser = async (id, name, room) => {
-  console.log("userStatis", isUserExist(name));
-  try {
-    const response = await axios.post("/users", {
-      id,
-      name,
-      room,
-    });
-    return response;
-  } catch (error) {}
-};
+  async clearUser(id: string) {
+    try {
+      const clearUser = await axios.delete(`/users/${id}`);
+      return clearUser;
+    } catch (error) {}
+  }
 
-const clearUser = async (id) => {
-  try {
-    const response = await axios.delete(`/users/${id}`);
-    return response;
-  } catch (error) {}
-};
+  async getUserDetail(id: string) {
+    try {
+      const userDetail = await axios.get(`/users/${id}`);
+      return userDetail;
+    } catch (error) {}
+  }
 
-export {
-  getUserRoom,
-  addPlayerToRoom,
-  assingRoomToPlayer,
-  createUser,
-  clearUser,
-};
+  async getUsers() {
+    try {
+      const userList = await axios.get(`/users`);
+      return userList;
+    } catch (error) {}
+  }
+
+  async assignRoom(room: string, uid: string) {
+    try {
+      const assingUser = await axios
+        .patch(`/users/${uid}`, {
+          room,
+        })
+        .catch();
+      return assingUser;
+    } catch (error) {}
+  }
+
+  async removeUserFromRoom(uid: string) {
+    try {
+      const removeRoom = await axios.patch(`/users/${uid}`, {
+        room: "",
+      });
+      return removeRoom;
+    } catch (error) {}
+  }
+
+  async _isUserExist(name: string) {
+    const isExist = await this.getUsers().then((result) =>
+      result?.data.find((user) => user.name === name)
+    );
+    let isUserExist = false;
+    if (isExist) {
+      isUserExist = true;
+    }
+    return isUserExist;
+  }
+
+  public createRandomNumber(min: number, max: number): number {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+}
+
+export default APIService;

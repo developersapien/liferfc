@@ -35,155 +35,170 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.clearUser = exports.createUser = exports.assingRoomToPlayer = exports.addPlayerToRoom = exports.getUserRoom = void 0;
 var axios_1 = __importDefault(require("axios"));
-axios_1.default.defaults.baseURL = "http://localhost:3000";
-var activeUsers = [];
-var getUserRoom = function (id) { return __awaiter(void 0, void 0, void 0, function () {
-    var response, error_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, axios_1.default.get("/users/" + id)];
-            case 1:
-                response = _a.sent();
-                return [2 /*return*/, response.data.room];
-            case 2:
-                error_1 = _a.sent();
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
-exports.getUserRoom = getUserRoom;
-var getUserDetail = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var userDetail, error_2;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, axios_1.default.get("/users")];
-            case 1:
-                userDetail = _a.sent();
-                return [2 /*return*/, userDetail];
-            case 2:
-                error_2 = _a.sent();
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
-var addPlayerToRoom = function (id, username, room) { return __awaiter(void 0, void 0, void 0, function () {
-    var getActivePlayers, activePlayer, response, error_3;
-    var _a;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                _b.trys.push([0, 3, , 4]);
-                return [4 /*yield*/, axios_1.default.get("/rooms/" + id)];
-            case 1:
-                getActivePlayers = _b.sent();
-                activePlayer = (_a = getActivePlayers === null || getActivePlayers === void 0 ? void 0 : getActivePlayers.data) === null || _a === void 0 ? void 0 : _a.players;
-                return [4 /*yield*/, axios_1.default.patch("/rooms/" + id, {
-                        players: __spreadArrays(activePlayer, [id]),
-                    })];
-            case 2:
-                response = _b.sent();
-                return [2 /*return*/, response];
-            case 3:
-                error_3 = _b.sent();
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
-        }
-    });
-}); };
-exports.addPlayerToRoom = addPlayerToRoom;
-var assingRoomToPlayer = function (id, roomName) { return __awaiter(void 0, void 0, void 0, function () {
-    var response, error_4;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, axios_1.default.patch("/users/" + id, {
-                        room: roomName,
-                    })];
-            case 1:
-                response = _a.sent();
-                return [2 /*return*/, response];
-            case 2:
-                error_4 = _a.sent();
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
-exports.assingRoomToPlayer = assingRoomToPlayer;
-/* Check if user Exists */
-var isUserExist = function (name) {
-    var isExist;
-    getUserDetail().then(function (result) {
-        if (result === null || result === void 0 ? void 0 : result.data.find(function (user) { return user.name === name; })) {
-            isExist = true;
-        }
-        else {
-            isExist = false;
-        }
-    });
-    console.log("isExost", isExist);
-    return isExist;
-};
-var createUser = function (id, name, room) { return __awaiter(void 0, void 0, void 0, function () {
-    var response, error_5;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                console.log("userStatis", isUserExist(name));
-                _a.label = 1;
-            case 1:
-                _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, axios_1.default.post("/users", {
-                        id: id,
-                        name: name,
-                        room: room,
-                    })];
-            case 2:
-                response = _a.sent();
-                return [2 /*return*/, response];
-            case 3:
-                error_5 = _a.sent();
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
-        }
-    });
-}); };
-exports.createUser = createUser;
-var clearUser = function (id) { return __awaiter(void 0, void 0, void 0, function () {
-    var response, error_6;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, axios_1.default.delete("/users/" + id)];
-            case 1:
-                response = _a.sent();
-                return [2 /*return*/, response];
-            case 2:
-                error_6 = _a.sent();
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
-exports.clearUser = clearUser;
+var APIService = /** @class */ (function () {
+    function APIService() {
+        this.isUserExist = false;
+        axios_1.default.defaults.baseURL = "http://json-server:3000";
+    }
+    APIService.prototype.createUser = function (id, name, room) {
+        if (room === void 0) { room = ""; }
+        return __awaiter(this, void 0, void 0, function () {
+            var userExist, userCreateResponse, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 4, , 5]);
+                        return [4 /*yield*/, this._isUserExist(name)];
+                    case 1:
+                        userExist = _a.sent();
+                        if (!!userExist) return [3 /*break*/, 3];
+                        return [4 /*yield*/, axios_1.default.post("/users", {
+                                id: id,
+                                name: name,
+                                room: room,
+                            })];
+                    case 2:
+                        userCreateResponse = _a.sent();
+                        console.log("User Create response", userCreateResponse);
+                        return [2 /*return*/, userCreateResponse];
+                    case 3: return [3 /*break*/, 5];
+                    case 4:
+                        error_1 = _a.sent();
+                        console.log("Server Error", error_1);
+                        return [3 /*break*/, 5];
+                    case 5: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    APIService.prototype.clearUser = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var clearUser, error_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.delete("/users/" + id)];
+                    case 1:
+                        clearUser = _a.sent();
+                        return [2 /*return*/, clearUser];
+                    case 2:
+                        error_2 = _a.sent();
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    APIService.prototype.getUserDetail = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var userDetail, error_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.get("/users/" + id)];
+                    case 1:
+                        userDetail = _a.sent();
+                        return [2 /*return*/, userDetail];
+                    case 2:
+                        error_3 = _a.sent();
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    APIService.prototype.getUsers = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var userList, error_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.get("/users")];
+                    case 1:
+                        userList = _a.sent();
+                        return [2 /*return*/, userList];
+                    case 2:
+                        error_4 = _a.sent();
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    APIService.prototype.assignRoom = function (room, uid) {
+        return __awaiter(this, void 0, void 0, function () {
+            var assingUser, error_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default
+                                .patch("/users/" + uid, {
+                                room: room,
+                            })
+                                .catch()];
+                    case 1:
+                        assingUser = _a.sent();
+                        return [2 /*return*/, assingUser];
+                    case 2:
+                        error_5 = _a.sent();
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    APIService.prototype.removeUserFromRoom = function (uid) {
+        return __awaiter(this, void 0, void 0, function () {
+            var removeRoom, error_6;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, axios_1.default.patch("/users/" + uid, {
+                                room: "",
+                            })];
+                    case 1:
+                        removeRoom = _a.sent();
+                        return [2 /*return*/, removeRoom];
+                    case 2:
+                        error_6 = _a.sent();
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    APIService.prototype._isUserExist = function (name) {
+        return __awaiter(this, void 0, void 0, function () {
+            var isExist, isUserExist;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getUsers().then(function (result) { return result === null || result === void 0 ? void 0 : result.data.find(function (user) { return user.name === name; }); })];
+                    case 1:
+                        isExist = _a.sent();
+                        isUserExist = false;
+                        if (isExist) {
+                            isUserExist = true;
+                        }
+                        return [2 /*return*/, isUserExist];
+                }
+            });
+        });
+    };
+    APIService.prototype.createRandomNumber = function (min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    };
+    return APIService;
+}());
+exports.default = APIService;

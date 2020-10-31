@@ -25,14 +25,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var http = __importStar(require("http"));
 var socket_io_1 = __importDefault(require("socket.io"));
-var calculation_service_1 = __importDefault(require("./calculation.service"));
-var api_service_1 = require("./api.service");
-var ap_service_1 = __importDefault(require("./ap.service"));
+var api_service_1 = __importDefault(require("./api.service"));
 var port = 8081;
 var server = http.createServer(express_1.default);
 var io = socket_io_1.default(server);
-var apiService = new ap_service_1.default();
-var calculationService = new calculation_service_1.default();
+var apiService = new api_service_1.default();
 io.on("connection", function (socket) {
     socket.on("login", function (_a) {
         var username = _a.username;
@@ -83,7 +80,7 @@ io.on("connection", function (socket) {
             .getUserDetail(socket.id)
             .then(function (result) {
             io.to(result === null || result === void 0 ? void 0 : result.data.room).emit("randomNumber", {
-                number: "" + calculation_service_1.default.createRandomNumber(1999, 9999),
+                number: "" + apiService.createRandomNumber(1999, 9999),
                 isFirst: true,
             });
             socket.broadcast.emit("activateYourTurn", {
@@ -153,7 +150,7 @@ io.on("connection", function (socket) {
                 socket.leave(result === null || result === void 0 ? void 0 : result.data.room);
             });
         });
-        api_service_1.clearUser(socket.id).then(function () {
+        apiService.clearUser(socket.id).then(function () {
             socket.broadcast.emit("listTrigger", "" + true);
         });
     });

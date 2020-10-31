@@ -1,21 +1,13 @@
 import express from "express";
 import * as http from "http";
 import SocketIO from "socket.io";
-import CalculationService from "./calculation.service";
-import {
-  createUser,
-  addPlayerToRoom,
-  assingRoomToPlayer,
-  getUserRoom,
-  clearUser,
-} from "./api.service";
-import APIService from "./ap.service";
+
+import APIService from "./api.service";
 
 const port = 8081;
 const server = http.createServer(express);
 const io = SocketIO(server);
 const apiService = new APIService();
-const calculationService = new CalculationService();
 
 io.on("connection", (socket) => {
   socket.on("login", ({ username }) => {
@@ -69,7 +61,7 @@ io.on("connection", (socket) => {
       .getUserDetail(socket.id)
       .then((result) => {
         io.to(result?.data.room).emit("randomNumber", {
-          number: `${CalculationService.createRandomNumber(1999, 9999)}`,
+          number: `${apiService.createRandomNumber(1999, 9999)}`,
           isFirst: true,
         });
 
@@ -147,7 +139,7 @@ io.on("connection", (socket) => {
         socket.leave(result?.data.room);
       });
     });
-    clearUser(socket.id).then(() => {
+    apiService.clearUser(socket.id).then(() => {
       socket.broadcast.emit("listTrigger", `${true}`);
     });
   });
