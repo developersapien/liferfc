@@ -1,0 +1,47 @@
+{
+  "rooms": [
+    {
+      "id": 1,
+      "name": "istanbul",
+      "players": [
+        1
+      ],
+      "type": "cpu"
+    },
+    {
+      "id": 2,
+      "name": "berlin",
+      "owner": 2,
+      "players": [
+        2
+      ],
+      "type": "cpu"
+    },
+    {
+      "id": "d2726a4a",
+      "name": "Sprudel",
+      "owner": "I0yZ-jSTAGV8xTNkAAAD",
+      "type": "human",
+      "players": []
+    },
+    {
+      "id": "aa0c86fa",
+      "name": "Cola",
+      "owner": "lqcflVIEANZWYkmAAAAC",
+      "type": "human",
+      "players": []
+    }
+  ],
+  "users": [
+    {
+      "id": "INorAodLxlvA970wAAAE",
+      "name": "baskan",
+      "room": ""
+    },
+    {
+      "id": "k7U6dSxahvmQqLfZAAAF",
+      "name": "toskana",
+      "room": ""
+    }
+  ]
+}

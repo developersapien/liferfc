@@ -1,0 +1,12 @@
+client:
+  build: client
+  container_name: "taway-client"
+  ports:
+    - "3001:3001"
+    - "4200:4200"
+    - "8180:8180"
+    - "8080:8080"
+  volumes:
+    - ./client:/client
+  working_dir: /client
+  command: "npm start"
