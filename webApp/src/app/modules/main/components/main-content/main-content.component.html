@@ -22,23 +22,25 @@
       '-wrong': !result.isCorrect
     }"
   >
-    <div
-      class="c-main-content__itemImage"
-      [ngClass]="{ '-oponent': result.user !== uiService.getUsername() }"
-    >
-      {{ result.selectedNumber }}
-    </div>
-    <div class="c-main-content__itemWrapper">
-      <span class="c-main-content__itemText -result">
-        [({{ result.selectedNumber }} + {{ result.number }}) / 3]
-      </span>
-      <span class="c-main-content__itemText -calculation">
-        {{ result.number }}
-      </span>
-      <span class="c-main-content__itemTitle">
-        {{ result.user === uiService.getUsername() ? "You" : result.user }} :
-        {{ result.isCorrect ? "Correct" : "Wrong" }}
-      </span>
+    <div class="c-main-content__content">
+      <div
+        class="c-main-content__itemImage"
+        [ngClass]="{ '-oponent': result.user !== uiService.getUsername() }"
+      >
+        {{ result.selectedNumber }}
+      </div>
+      <div class="c-main-content__itemWrapper">
+        <span class="c-main-content__itemText -result">
+          [({{ result.selectedNumber }} + {{ result.number }}) / 3]
+        </span>
+        <span class="c-main-content__itemText -calculation">
+          {{ result.number }}
+        </span>
+        <span class="c-main-content__itemTitle">
+          {{ result.user === uiService.getUsername() ? "You" : result.user }} :
+          {{ result.isCorrect ? "Correct" : "Wrong" }}
+        </span>
+      </div>
     </div>
   </div>
   <div class="overlay" *ngIf="gameOver">
