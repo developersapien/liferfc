@@ -1,0 +1,6 @@
+<ng-container *ngIf="!!mainService.activateCompetition$.value; else stateLogin">
+  <h3 class="c-main-header__welcome">
+    <strong> {{ message?.user }}</strong> {{ message?.message }}
+  </h3>
+</ng-container>
+<ng-template #stateLogin> <h3>Welcome</h3></ng-template>

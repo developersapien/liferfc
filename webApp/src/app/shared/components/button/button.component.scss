@@ -1,0 +1,38 @@
+:host {
+  .c-button {
+    background-color: #4863f0;
+    border-color: rgba(71, 98, 240, 0.12);
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.15);
+    color: #ecf6ff;
+    padding: 10px 15px;
+    &:hover {
+      cursor: pointer;
+      transition: 0.5s;
+      background-color: rgba($color: #4863f0, $alpha: 0.8);
+    }
+  }
+
+  .button_rounded {
+    background-color: #4863f0;
+    border-color: rgba(71, 98, 240, 0.12);
+    border-radius: 50%;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.15);
+    color: #ecf6ff;
+    padding: 10px 15px;
+    font-size: 18px;
+    width: 45px;
+    height: 45px;
+    &:focus {
+      outline: none !important;
+      border: 1px solid #fff;
+      box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.5);
+    }
+
+    &:hover {
+      cursor: pointer;
+      transition: 0.5s;
+      background-color: rgba($color: #4863f0, $alpha: 0.8);
+    }
+  }
+}

@@ -1,0 +1,6 @@
+<ng-container *ngIf="type === 'placeholder'; else avatar">
+  <div class="c-avatar__placeholder"></div>
+</ng-container>
+<ng-template #avatar>
+  <img src="https://picsum.photos/{{ photoId }}" class="c-avatar" />
+</ng-template>

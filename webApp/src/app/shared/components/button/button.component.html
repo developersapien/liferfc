@@ -1,0 +1,14 @@
+<ng-container *ngIf="isRounded === false; else square">
+  <button type="submit" (click)="actionEvent.emit($event)" class="c-button">
+    {{ buttonText }}
+  </button>
+</ng-container>
+<ng-template #square>
+  <button
+    type="submit"
+    (click)="actionEvent.emit($event)"
+    class="button_rounded"
+  >
+    {{ buttonText }}
+  </button>
+</ng-template>

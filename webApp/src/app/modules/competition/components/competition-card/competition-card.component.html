@@ -1,0 +1,46 @@
+<div
+  class="competition-card"
+  *ngFor="let room of roomList$ | async; let i = index"
+>
+  <ul class="competition-card__list">
+    <li
+      class="competition-card__item"
+      [ngClass]="{ '-cpu': room?.type === 'cpu' }"
+    >
+      <div class="competition-card__avatar">
+        <ng-container *ngIf="room.type === 'cpu'; else human">
+          <fa-icon
+            icon="microchip"
+            style="color: #666666; margin-right: 10px"
+            pull="center"
+            size="2x"
+          ></fa-icon>
+        </ng-container>
+        <ng-template #human>
+          <app-avatar photoId="{{ i }}"></app-avatar>
+        </ng-template>
+      </div>
+      <div class="competition-card__title">
+        {{ room.name }}
+      </div>
+      <div class="competition-card__join">
+        <ng-container
+          *ngIf="!!mainService.activateCompetition$.value; else joiningActive"
+        >
+          <app-button buttonText="Waiting..."></app-button>
+        </ng-container>
+        <ng-template #joiningActive>
+          <ng-container *ngIf="room.name === joinedRoom; else join">
+            <app-button buttonText="Waiting..."></app-button>
+          </ng-container>
+          <ng-template #join>
+            <app-button
+              (click)="joinRoom(room.name)"
+              buttonText="JoinRoom"
+            ></app-button>
+          </ng-template>
+        </ng-template>
+      </div>
+    </li>
+  </ul>
+</div>

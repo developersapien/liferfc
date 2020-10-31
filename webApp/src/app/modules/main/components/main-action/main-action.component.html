@@ -1,0 +1,27 @@
+<ng-container
+  *ngIf="!mainService.activateCompetition$.value; else activateButton"
+>
+</ng-container>
+<ng-template #activateButton>
+  <ng-container *ngIf="mustWait; else activeTurn">
+    <span class="c-main-action__info">Waiting for the oponent</span>
+  </ng-container>
+  <ng-template #activeTurn>
+    <app-button
+      (actionEvent)="resultEvent('-1')"
+      isRounded="true"
+      buttonText="-1"
+    ></app-button>
+    <app-button
+      (actionEvent)="resultEvent('0')"
+      isRounded="true"
+      buttonText="0"
+    ></app-button>
+    <app-button
+      isDisabled="true"
+      (actionEvent)="resultEvent('1')"
+      isRounded="true"
+      buttonText="+1"
+    ></app-button>
+  </ng-template>
+</ng-template>

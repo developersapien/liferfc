@@ -1,0 +1,21 @@
+<div>
+  <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+    <div>
+      <label class="competition-login__label">
+        Nickname
+        <div class="competition-login__inputArea">
+          <app-avatar photoId="45"></app-avatar>
+          <input
+            class="competition-login__input"
+            placeholder="Please choose name!"
+            type="text"
+            formControlName="nickname"
+          />
+        </div>
+      </label>
+      <div class="competition-login__action">
+        <app-button buttonText="Lets play!"></app-button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,58 @@
+<div class="overlay" *ngIf="!startGame">
+  <div *ngIf="state === 'game'; else stateLogin" class="overlay__message">
+    Please Join one of the available Rooms
+  </div>
+  <ng-template #stateLogin>
+    <div class="overlay__message">Please Type Your Nickname!</div>
+  </ng-template>
+</div>
+<div
+  *ngIf="!!mainService.activateCompetition$.value"
+  class="c-main-content__startNumber"
+>
+  Start Number {{ startNumber$ }}
+</div>
+<div *ngIf="results.length > 0" class="c-main-content__placeholder">
+  <div
+    *ngFor="let result of results; let i = index"
+    class="c-main-content__item"
+    [ngClass]="{
+      '-alignLeft': result.user === uiService.getUsername(),
+      '-alignRight': result.user !== uiService.getUsername(),
+      '-wrong': !result.isCorrect
+    }"
+  >
+    <div
+      class="c-main-content__itemImage"
+      [ngClass]="{ '-oponent': result.user !== uiService.getUsername() }"
+    >
+      {{ result.selectedNumber }}
+    </div>
+    <div class="c-main-content__itemWrapper">
+      <span class="c-main-content__itemText -result">
+        [({{ result.selectedNumber }} + {{ result.number }}) / 3]
+      </span>
+      <span class="c-main-content__itemText -calculation">
+        {{ result.number }}
+      </span>
+      <span class="c-main-content__itemTitle">
+        {{ result.user === uiService.getUsername() ? "You" : result.user }} :
+        {{ result.isCorrect ? "Correct" : "Wrong" }}
+      </span>
+    </div>
+  </div>
+  <div class="overlay" *ngIf="gameOver">
+    <div
+      class="overlay__message"
+      *ngIf="winner === uiService.getUsername(); else oponentWins"
+    >
+      <h3>Congrats You Win the Game!</h3>
+    </div>
+    <ng-template #oponentWins>
+      <div class="overlay__message">
+        <h3>The Winner is {{ winner }}</h3>
+      </div>
+    </ng-template>
+    <app-button (click)="clear()" buttonText="end game"></app-button>
+  </div>
+</div>

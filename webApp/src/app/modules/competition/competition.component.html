@@ -1,0 +1,9 @@
+<ng-container *ngIf="!!isLogin; else isCard">
+  <app-competition-login
+    (actionEvent)="resultEvent($event)"
+  ></app-competition-login>
+</ng-container>
+
+<ng-template #isCard>
+  <app-competition-card></app-competition-card>
+</ng-template>

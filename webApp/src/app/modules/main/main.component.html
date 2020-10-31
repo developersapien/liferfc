@@ -1,0 +1,11 @@
+<div class="mainScreen">
+  <div class="mainScreen__header">
+    <app-main-header></app-main-header>
+  </div>
+  <div class="mainScreen__content">
+    <app-main-content></app-main-content>
+  </div>
+  <div class="mainScreen__action">
+    <app-main-action *ngIf="state === 'game'"></app-main-action>
+  </div>
+</div>
