@@ -9,6 +9,7 @@
 - NgxSocket
 - RxJs ( for small state control)
 - Typescript
+- Fontawesome for some icons
 
 **Backend**
 
@@ -19,9 +20,10 @@
 
 - Json Server for API and DB placeholders
 
-**OPS**
+**DEVOPS**
 
-- Docker for start the project on all environments.
+- Docker for start the project in all environments.
+- Docker Compose
 
 ## How it works
 
@@ -34,3 +36,11 @@
 `docker-compose build`
 
 `docker-compose up`
+
+## Port Mapping Info
+
+WebApp Port: `4200`
+
+WebSocket Port: `8081`
+
+JsonServer Port: `3000`
