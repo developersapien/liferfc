@@ -2,7 +2,7 @@ version: "3"
 services:
   json-server:
     image: vimagick/json-server
-    container_name: "taway-json-server"
+    container_name: "take-json-server"
     command: -H 0.0.0.0 -p 3000 -w /dataAPI/db.json
     ports:
       - "3000:3000"
@@ -11,18 +11,19 @@ services:
     restart: always
   web:
     build: webApp
-    container_name: "taway-web-app"
+    container_name: "take-web-app"
     ports:
       - "3001:3001"
       - "4200:4200"
       - "8080:8080"
     volumes:
       - ./webApp:/webApp
+      - /webApp/node_modules
     working_dir: /webApp
     command: "npm start"
   wss:
     build: wss
-    container_name: "taway-socket"
+    container_name: "take-socket"
     ports:
       - "8081:8081"
     volumes:

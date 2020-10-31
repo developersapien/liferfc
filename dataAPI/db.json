@@ -3,18 +3,14 @@
     {
       "id": 1,
       "name": "istanbul",
-      "players": [
-        1
-      ],
+      "players": [1],
       "type": "cpu"
     },
     {
       "id": 2,
       "name": "berlin",
       "owner": 2,
-      "players": [
-        2
-      ],
+      "players": [2],
       "type": "cpu"
     },
     {
@@ -32,26 +28,5 @@
       "players": []
     }
   ],
-  "users": [
-    {
-      "id": "INorAodLxlvA970wAAAE",
-      "name": "baskan",
-      "room": ""
-    },
-    {
-      "id": "k7U6dSxahvmQqLfZAAAF",
-      "name": "toskana",
-      "room": ""
-    },
-    {
-      "id": "RNtzIn1RgrcfzKnuAAAI",
-      "name": "Hakna",
-      "room": ""
-    },
-    {
-      "id": "RuJm8npxAwPj0qnwAAAJ",
-      "name": "arkobinko",
-      "room": ""
-    }
-  ]
+  "users": []
 }
