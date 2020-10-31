@@ -10,6 +10,7 @@
 - RxJs ( for small state control)
 - Typescript
 - Fontawesome for some icons
+- Picsum Photos to add some random photos [Detail](https://picsum.photos/)
 
 **Backend**
 
